@@ -1,0 +1,8 @@
+---
+description: slopcheck catches and fixes the performance slop AI-generated ("vibe coded") sites ship with — audits, fixes, and verifies web/webapp performance across 20 standard optimizations (DB indexing/pooling, N+1 removal, query/API/server-side caching, payload compression, pagination, CDN, load balancer, code splitting, lazy loading, deferred scripts, image compression, minification, debounced input, memoized re-renders, loading skeletons, unused dependency removal, Lighthouse audit). Apply when the user asks to optimize performance, speed up the site/app, run a perf audit, clean up the slop, or pastes a checklist like this.
+alwaysApply: false
+---
+
+Full checklist and step-by-step instructions live in `AGENTS.md` at the repo root. Read that file before starting a performance audit and follow its Detect -> Fix -> Verify process for each of the 20 items.
+
+Never mark an item done without a concrete check behind it (grep hit, response header, `EXPLAIN` output, bundle size delta, Lighthouse score). Report back using the same evidence-per-item format `AGENTS.md` describes.

@@ -1,6 +1,6 @@
-# web-perf-audit
+# slopcheck
 
-An evidence-based web/webapp performance audit workflow for AI coding agents — Claude Code, Cursor, Windsurf, GitHub Copilot, Cline, and any agent that reads an `AGENTS.md`. It audits, fixes, and verifies 20 standard performance optimizations, and refuses to mark anything done without evidence.
+AI vibe-coded sites are always slow. **slopcheck** is an evidence-based performance audit workflow for AI coding agents — Claude Code, Cursor, Windsurf, GitHub Copilot, Cline, and any agent that reads an `AGENTS.md`. It audits, fixes, and verifies 20 standard performance optimizations, and refuses to mark anything done without evidence.
 
 Covers:
 
@@ -13,34 +13,34 @@ Every item follows **Detect → Fix → Verify**. Nothing is marked done without
 
 ## Why
 
-Most "optimize my site" prompts produce a checklist of claims with no evidence. This workflow forces the agent to actually check each item against the live repo/app before claiming it's done, and re-check after fixing.
+Most "optimize my site" prompts produce a checklist of claims with no evidence. slopcheck forces the agent to actually check each item against the live repo/app before claiming it's done, and re-check after fixing.
 
 ## Supported agents
 
 | Agent | File | How it's picked up |
 |---|---|---|
-| [Claude Code](https://claude.com/claude-code) | `skills/web-perf-audit/SKILL.md` | Claude Code Skill — install into `~/.claude/skills/` or a project's `.claude/skills/` |
-| Cursor | `.cursor/rules/web-perf-audit.mdc` | Project rule, auto-attached when the agent judges it relevant |
+| [Claude Code](https://claude.com/claude-code) | `skills/slopcheck/SKILL.md` | Claude Code Skill — install into `~/.claude/skills/` or a project's `.claude/skills/` |
+| Cursor | `.cursor/rules/slopcheck.mdc` | Project rule, auto-attached when the agent judges it relevant |
 | Windsurf | `.windsurfrules` | Read automatically at the repo root |
 | GitHub Copilot (Chat / coding agent) | `.github/copilot-instructions.md` | Read automatically at the repo root |
 | Cline | `.clinerules` | Read automatically at the repo root |
 | Any AGENTS.md-compatible agent (Codex CLI, Amp, Jules, etc.) | `AGENTS.md` | Standard root-level agent instructions file |
 
-`AGENTS.md` at the repo root is the single source of truth for the full 20-item checklist. The Cursor/Windsurf/Copilot/Cline files are thin pointers that tell those agents to read it — this keeps the checklist in one place instead of drifting across five copies. The Claude Code Skill (`skills/web-perf-audit/SKILL.md`) is a self-contained variant with Claude Code-specific subagent delegation for larger repos.
+`AGENTS.md` at the repo root is the single source of truth for the full 20-item checklist. The Cursor/Windsurf/Copilot/Cline files are thin pointers that tell those agents to read it — this keeps the checklist in one place instead of drifting across five copies. The Claude Code Skill (`skills/slopcheck/SKILL.md`) is a self-contained variant with Claude Code-specific subagent delegation for larger repos.
 
 ## Install
 
 ### Claude Code
 
 ```bash
-git clone https://github.com/sammyyakk/web-perf-audit-skill.git
-cp -r web-perf-audit-skill/skills/web-perf-audit ~/.claude/skills/
+git clone https://github.com/sammyyakk/slopcheck.git
+cp -r slopcheck/skills/slopcheck ~/.claude/skills/
 ```
 
 Project-scoped instead of user-scoped (only active inside one repo):
 
 ```bash
-cp -r web-perf-audit-skill/skills/web-perf-audit /path/to/your/project/.claude/skills/
+cp -r slopcheck/skills/slopcheck /path/to/your/project/.claude/skills/
 ```
 
 Restart Claude Code (or start a new session) so it picks up the new skill.
@@ -50,15 +50,15 @@ Restart Claude Code (or start a new session) so it picks up the new skill.
 Drop the relevant file(s) at the root of your project:
 
 ```bash
-git clone https://github.com/sammyyakk/web-perf-audit-skill.git tmp-web-perf-audit
+git clone https://github.com/sammyyakk/slopcheck.git tmp-slopcheck
 
-cp tmp-web-perf-audit/AGENTS.md .
-cp -r tmp-web-perf-audit/.cursor .            # Cursor
-cp tmp-web-perf-audit/.windsurfrules .        # Windsurf
-mkdir -p .github && cp tmp-web-perf-audit/.github/copilot-instructions.md .github/   # Copilot
-cp tmp-web-perf-audit/.clinerules .           # Cline
+cp tmp-slopcheck/AGENTS.md .
+cp -r tmp-slopcheck/.cursor .                 # Cursor
+cp tmp-slopcheck/.windsurfrules .             # Windsurf
+mkdir -p .github && cp tmp-slopcheck/.github/copilot-instructions.md .github/   # Copilot
+cp tmp-slopcheck/.clinerules .                # Cline
 
-rm -rf tmp-web-perf-audit
+rm -rf tmp-slopcheck
 ```
 
 Only copy the files for the agent(s) you actually use — `AGENTS.md` is required in every case since the tool-specific files point to it; the rest are optional pointers.
@@ -67,11 +67,12 @@ If your project already has an `AGENTS.md`, `.cursor/rules/`, `.windsurfrules`, 
 
 ## Usage
 
-**Claude Code**: invoke directly with `/web-perf-audit`, or just describe the task — it also triggers on:
+**Claude Code**: invoke directly with `/slopcheck`, or just describe the task — it also triggers on:
 
 - "optimize performance"
 - "speed up the site/app"
 - "run a perf audit"
+- "clean up the slop"
 - pasting a checklist like the one this covers
 
 **Other agents**: ask them the same way ("optimize this app's performance", "run a perf audit") — the rules/instructions file tells them to read `AGENTS.md` and follow it.

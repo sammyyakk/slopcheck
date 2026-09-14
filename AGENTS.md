@@ -1,6 +1,6 @@
-# Web Performance Audit
+# slopcheck
 
-Agent instructions for auditing, fixing, and verifying web/webapp performance. Triggers whenever the user asks to "optimize performance", "speed up the site/app", "run a perf audit", or pastes a checklist like the one below.
+Agent instructions for catching and fixing the performance slop AI-generated ("vibe coded") sites ship with — auditing, fixing, and verifying web/webapp performance. Triggers whenever the user asks to "optimize performance", "speed up the site/app", "run a perf audit", "clean up the slop", or pastes a checklist like the one below.
 
 20-item checklist, grouped by layer. For every item: **Detect** current state → **Fix** if missing → **Verify** with a concrete, re-runnable check (not a guess). Never mark an item done without evidence (grep hit, header value, `EXPLAIN` output, bundle size number, Lighthouse score). Unverifiable = not done, never assumed done.
 

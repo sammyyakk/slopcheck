@@ -1,9 +1,9 @@
 ---
-name: web-perf-audit
-description: Audit, fix, and verify web/webapp performance across 20 standard optimizations (image compression, CDN, load balancer, DB indexing/pooling, N+1 removal, query caching, API response caching, payload compression, pagination, code splitting, lazy loading, deferred scripts, minification, debounced inputs, memoized re-renders, loading skeletons, unused dependency removal, Lighthouse audit, server-side caching). Every task is checked against the live repo and running app before being marked done — nothing is assumed. Delegates grunt recon/edits to caveman subagents to keep main context small. Use when user asks to "optimize performance", "speed up the site/app", "run a perf audit", or pastes a checklist like this skill covers.
+name: slopcheck
+description: Catches and fixes the performance slop AI-generated ("vibe coded") sites ship with — audits, fixes, and verifies web/webapp performance across 20 standard optimizations (image compression, CDN, load balancer, DB indexing/pooling, N+1 removal, query caching, API response caching, payload compression, pagination, code splitting, lazy loading, deferred scripts, minification, debounced inputs, memoized re-renders, loading skeletons, unused dependency removal, Lighthouse audit, server-side caching). Every task is checked against the live repo and running app before being marked done — nothing is assumed. Delegates grunt recon/edits to caveman subagents to keep main context small. Use when user asks to "optimize performance", "speed up the site/app", "run a perf audit", "clean up the slop", or pastes a checklist like this skill covers.
 ---
 
-# Web Perf Audit
+# slopcheck
 
 20-item checklist, grouped by layer. For every item: **Detect** current state → **Fix** if missing → **Verify** with a concrete, re-runnable check (not a guess). Never mark ✅ without evidence (grep hit, header value, EXPLAIN output, bundle size number, Lighthouse score). Unverifiable = ❌ or ⚠️, never ✅.
 
