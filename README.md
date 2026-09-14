@@ -1,5 +1,7 @@
 # slopcheck
 
+![slopcheck](assets/banner.png)
+
 Your AI wrote you a slow website. Shocking, we know.
 
 slopcheck is a performance audit workflow for AI coding agents. Claude Code, Cursor, Windsurf, GitHub Copilot, Cline, whatever reads an `AGENTS.md`. It rips through 20 standard performance checks, fixes what's broken, and refuses to say "done" unless it can prove it.
