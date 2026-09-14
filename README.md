@@ -8,6 +8,8 @@ slopcheck is a performance audit workflow for AI coding agents. Claude Code, Cur
 
 No vibes. No "looks good to me." Receipts only.
 
+![slopcheck audit run](assets/terminal.svg)
+
 Covers:
 
 **Database** indexing, connection pooling, N+1 removal, query caching, pagination

@@ -1,0 +1,86 @@
+<svg width="880" height="300" viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="slopcheck terminal output animation">
+  <title>slopcheck audit run</title>
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      <![CDATA[
+        text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+        .card { animation: pulse 3s ease-in-out infinite; }
+        @keyframes pulse {
+          0%, 100% { stroke-opacity: .55; }
+          50% { stroke-opacity: 1; }
+        }
+        .line { opacity: 0; animation-duration: 14s; animation-iteration-count: infinite; animation-timing-function: linear; }
+        .l1 { animation-name: l1; }
+        .l2 { animation-name: l2; }
+        .l3 { animation-name: l3; }
+        .l4 { animation-name: l4; }
+        .l5 { animation-name: l5; }
+        .l6 { animation-name: l6; }
+        .l7 { animation-name: l7; }
+        @keyframes l1 { 0%{opacity:0} 3%{opacity:0} 6%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l2 { 0%{opacity:0} 11%{opacity:0} 14%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l3 { 0%{opacity:0} 20%{opacity:0} 23%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l4 { 0%{opacity:0} 29%{opacity:0} 32%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l5 { 0%{opacity:0} 37%{opacity:0} 40%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l6 { 0%{opacity:0} 46%{opacity:0} 49%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        @keyframes l7 { 0%{opacity:0} 54%{opacity:0} 58%{opacity:1} 93%{opacity:1} 94%{opacity:0} 100%{opacity:0} }
+        .cursor {
+          animation: blink 14s infinite steps(1);
+        }
+        @keyframes blink {
+          0%   { opacity: 0; }
+          57%  { opacity: 0; }
+          58%  { opacity: 1; }
+          61%  { opacity: 1; }
+          62%  { opacity: 0; }
+          65%  { opacity: 0; }
+          66%  { opacity: 1; }
+          69%  { opacity: 1; }
+          70%  { opacity: 0; }
+          73%  { opacity: 0; }
+          74%  { opacity: 1; }
+          77%  { opacity: 1; }
+          78%  { opacity: 0; }
+          81%  { opacity: 0; }
+          82%  { opacity: 1; }
+          85%  { opacity: 1; }
+          86%  { opacity: 0; }
+          89%  { opacity: 0; }
+          90%  { opacity: 1; }
+          92%  { opacity: 1; }
+          93%  { opacity: 0; }
+          100% { opacity: 0; }
+        }
+      ]]>
+    </style>
+  </defs>
+
+  <rect class="card" x="1" y="1" width="878" height="298" rx="14" fill="#0a0e17" stroke="#39ff88" stroke-opacity="0.55" stroke-width="1.5"/>
+
+  <rect x="1" y="1" width="878" height="40" rx="14" fill="#12182a"/>
+  <rect x="1" y="27" width="878" height="14" fill="#12182a"/>
+  <circle cx="24" cy="21" r="6" fill="#ff5f57"/>
+  <circle cx="46" cy="21" r="6" fill="#febc2e"/>
+  <circle cx="68" cy="21" r="6" fill="#28c840"/>
+  <text x="92" y="26" font-size="12" fill="#6b7280">slopcheck &#8212; zsh</text>
+
+  <g filter="url(#glow)">
+    <g class="line l1"><text x="24" y="76" font-size="16" fill="#7dd3fc">$ slopcheck run</text></g>
+    <g class="line l2"><text x="24" y="106" font-size="16" fill="#9ca3af">&gt; auditing 20 performance checks...</text></g>
+    <g class="line l3"><text x="24" y="136" font-size="16" fill="#39ff88">&gt; database  <tspan fill="#ff8c1a">ok</tspan>  indexed, pooled, N+1 removed</text></g>
+    <g class="line l4"><text x="24" y="166" font-size="16" fill="#39ff88">&gt; backend   <tspan fill="#ff8c1a">ok</tspan>  cached, compressed, load balanced</text></g>
+    <g class="line l5"><text x="24" y="196" font-size="16" fill="#39ff88">&gt; frontend  <tspan fill="#ff8c1a">ok</tspan>  minified, split, lazy loaded</text></g>
+    <g class="line l6"><text x="24" y="226" font-size="16" fill="#39ff88">&gt; lighthouse  61 <tspan fill="#ff8c1a">-&gt;</tspan> 98</text></g>
+    <g class="line l7">
+      <text x="24" y="266" font-size="19" font-weight="700" fill="#ffffff" letter-spacing="0.5">DONE. VERIFIED. RECEIPTS ONLY.</text>
+      <rect class="cursor" x="398" y="251" width="10" height="20" fill="#39ff88"/>
+    </g>
+  </g>
+</svg>
