@@ -1,5 +1,5 @@
 ---
-description: slopcheck catches and fixes the performance slop AI-generated ("vibe coded") sites ship with — audits, fixes, and verifies web/webapp performance across 20 standard optimizations (DB indexing/pooling, N+1 removal, query/API/server-side caching, payload compression, pagination, CDN, load balancer, code splitting, lazy loading, deferred scripts, image compression, minification, debounced input, memoized re-renders, loading skeletons, unused dependency removal, Lighthouse audit). Apply when the user asks to optimize performance, speed up the site/app, run a perf audit, clean up the slop, or pastes a checklist like this.
+description: slopcheck catches and fixes the performance slop AI-generated ("vibe coded") sites ship with, then proves it fixed them. Audits, fixes, and verifies web/webapp performance across 20 standard optimizations (DB indexing/pooling, N+1 removal, query/API/server-side caching, payload compression, pagination, CDN, load balancer, code splitting, lazy loading, deferred scripts, image compression, minification, debounced input, memoized re-renders, loading skeletons, unused dependency removal, Lighthouse audit). Apply when the user asks to optimize performance, speed up the site/app, run a perf audit, clean up the slop, or pastes a checklist like this.
 alwaysApply: false
 ---
 

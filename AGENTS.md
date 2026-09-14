@@ -1,16 +1,16 @@
 # slopcheck
 
-Agent instructions for catching and fixing the performance slop AI-generated ("vibe coded") sites ship with — auditing, fixing, and verifying web/webapp performance. Triggers whenever the user asks to "optimize performance", "speed up the site/app", "run a perf audit", "clean up the slop", or pastes a checklist like the one below.
+Agent instructions for catching and fixing the performance slop AI-generated ("vibe coded") sites ship with, then proving it fixed them. Covers auditing, fixing, and verifying web/webapp performance. Triggers whenever the user asks to "optimize performance", "speed up the site/app", "run a perf audit", "clean up the slop", or pastes a checklist like the one below.
 
 20-item checklist, grouped by layer. For every item: **Detect** current state → **Fix** if missing → **Verify** with a concrete, re-runnable check (not a guess). Never mark an item done without evidence (grep hit, header value, `EXPLAIN` output, bundle size number, Lighthouse score). Unverifiable = not done, never assumed done.
 
 ## Workflow
 
-1. **Scope**: confirm target (repo path, deployed URL if live verification is wanted, stack — Node/Next/Django/Rails/etc). If a live URL exists and browser automation is available (Playwright, Chrome DevTools, `lighthouse` CLI), use it for real measurements. If only source is available, verify statically (grep, config inspection, migration files).
-2. **Audit pass**: run Detect for all 20 items below. If your environment supports parallel/sub-tasked tool calls, use them for independent checks — the items don't depend on each other.
-3. **Fix pass**: for every item found missing, implement the Fix. Cross-cutting items (load balancer, CDN — usually infra config, not code) may need infra access outside the repo; flag those explicitly instead of faking a fix.
+1. **Scope**: confirm target (repo path, deployed URL if live verification is wanted, stack. Node/Next/Django/Rails/etc). If a live URL exists and browser automation is available (Playwright, Chrome DevTools, `lighthouse` CLI), use it for real measurements. If only source is available, verify statically (grep, config inspection, migration files).
+2. **Audit pass**: run Detect for all 20 items below. If your environment supports parallel/sub-tasked tool calls, use them for independent checks, the items don't depend on each other.
+3. **Fix pass**: for every item found missing, implement the Fix. Cross-cutting items (load balancer, CDN, usually infra config, not code) may need infra access outside the repo; flag those explicitly instead of faking a fix.
 4. **Verify pass**: re-run Detect for everything touched. Only mark an item done on a passing re-check.
-5. **Report**: emit the checklist back with one line of evidence per completed item, e.g. `Index the Database — idx_orders_user_id on orders(user_id), EXPLAIN shows Index Scan`.
+5. **Report**: emit the checklist back with one line of evidence per completed item, e.g. `Index the Database: idx_orders_user_id on orders(user_id), EXPLAIN shows Index Scan`.
 
 ---
 
@@ -27,7 +27,7 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 - **Verify**: connection count under load stays bounded (`SELECT count(*) FROM pg_stat_activity` or equivalent) instead of climbing with request rate.
 
 ### 3. Remove N+1 database queries
-- **Detect**: find loops that call the ORM/DB inside a `for`/`map` over a parent list (classic pattern: fetch list, then per-item fetch related data). Confirm via query log count during one request — N+1 shows as 1 + N queries instead of 1-2.
+- **Detect**: find loops that call the ORM/DB inside a `for`/`map` over a parent list (classic pattern: fetch list, then per-item fetch related data). Confirm via query log count during one request. N+1 shows as 1 + N queries instead of 1-2.
 - **Fix**: batch with `include`/`with`/`joinedload`/`select_related`/`prefetch_related`/GraphQL DataLoader, or a single JOIN/`WHERE id IN (...)` query.
 - **Verify**: query log for the same request now shows constant query count regardless of list size.
 
@@ -52,17 +52,17 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 
 ### 7. Compress API payloads
 - **Detect**: `curl -I -H "Accept-Encoding: gzip, br"` the endpoint, check `Content-Encoding` response header.
-- **Fix**: enable gzip/brotli at server or reverse-proxy level (nginx `gzip on`, Express `compression()`, framework middleware). Also trim payload itself — avoid over-fetching (select only needed fields, use pagination from #5).
+- **Fix**: enable gzip/brotli at server or reverse-proxy level (nginx `gzip on`, Express `compression()`, framework middleware). Also trim payload itself: avoid over-fetching (select only needed fields, use pagination from #5).
 - **Verify**: response has `Content-Encoding: gzip` or `br`; payload size measurably smaller than uncompressed.
 
 ### 8. Server-side caching
-- **Detect**: check for a cache layer (Redis/Memcached/in-memory LRU) in front of rendering or data-fetching logic — distinct from #4 (query-level) and #6 (HTTP-level); this is app-level (rendered fragments, computed views, SSR page cache).
+- **Detect**: check for a cache layer (Redis/Memcached/in-memory LRU) in front of rendering or data-fetching logic. This is app-level (rendered fragments, computed views, SSR page cache), distinct from #4 (query-level) and #6 (HTTP-level).
 - **Fix**: add cache layer for expensive computed/rendered output with sensible TTL and invalidation on write.
 - **Verify**: cache hit ratio metric/log shows hits on repeat requests; latency drops on cached path vs cold path.
 
 ### 9. Load balancer
-- **Detect**: check infra config (nginx upstream block, cloud LB resource — ALB/ELB/GCLB, Kubernetes Service/Ingress, `docker-compose` with multiple app replicas behind a proxy). Single app instance directly exposed = missing.
-- **Fix**: this is infra, not app code — flag if it needs cloud/infra access outside this repo. If in-repo (nginx.conf, k8s manifests, terraform), add LB config across ≥2 app instances with a health check.
+- **Detect**: check infra config (nginx upstream block, cloud LB resource like ALB/ELB/GCLB, Kubernetes Service/Ingress, `docker-compose` with multiple app replicas behind a proxy). Single app instance directly exposed = missing.
+- **Fix**: this is infra, not app code, flag it if it needs cloud/infra access outside this repo. If in-repo (nginx.conf, k8s manifests, terraform), add LB config across ≥2 app instances with a health check.
 - **Verify**: LB health check endpoint returns 200; traffic distributes across instances (check access logs per-instance, or cloud console metrics); killing one instance doesn't drop the app.
 
 ### 10. Add CDN
@@ -76,7 +76,7 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 
 ### 11. Minify JS and CSS
 - **Detect**: inspect build output (`dist`/`build`/`.next`) for unminified/readable JS-CSS, or check bundler config (Terser/esbuild/SWC minify flag, `mode: production`).
-- **Fix**: ensure production build uses minification (default in most modern bundlers under `production` mode — check it's not accidentally disabled).
+- **Fix**: ensure production build uses minification (default in most modern bundlers under `production` mode, just check it's not accidentally disabled).
 - **Verify**: built JS/CSS files are single-line/mangled, not formatted source; bundle size drops vs unminified build.
 
 ### 12. Split code into chunks
@@ -95,7 +95,7 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 - **Verify**: Lighthouse "Eliminate render-blocking resources" no longer flags these scripts; First Contentful Paint improves.
 
 ### 15. Compress images
-- **Detect**: check image file sizes/formats in assets — large PNG/JPG without WebP/AVIF alternative, no responsive `srcset`, no build-time image optimization pipeline (`next/image`, `sharp`, `imagemin`).
+- **Detect**: check image file sizes/formats in assets: large PNG/JPG without WebP/AVIF alternative, no responsive `srcset`, no build-time image optimization pipeline (`next/image`, `sharp`, `imagemin`).
 - **Fix**: convert to WebP/AVIF with fallback, compress with `sharp`/`imagemin`/framework image component, serve responsive sizes via `srcset`.
 - **Verify**: file size drop (before/after byte count) with no visible quality loss; Lighthouse "Properly size/Serve images in next-gen formats" no longer flags them.
 
@@ -110,7 +110,7 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 - **Verify**: visually confirm (screenshot/snapshot mid-load) skeleton renders instead of blank/spinner-only state; no layout shift when real content replaces it (check CLS in Lighthouse).
 
 ### 18. Remove unnecessary re-renders
-- **Detect**: React/Vue/etc — check for missing `memo`/`useMemo`/`useCallback` on expensive components, inline object/array/function props causing new refs each render, missing key stability in lists. Use React DevTools Profiler or `why-did-you-render` if available to confirm actual re-render count, not just theoretical risk.
+- **Detect**: for React/Vue/etc, check for missing `memo`/`useMemo`/`useCallback` on expensive components, inline object/array/function props causing new refs each render, missing key stability in lists. Use React DevTools Profiler or `why-did-you-render` if available to confirm actual re-render count, not just theoretical risk.
 - **Fix**: memoize expensive components, stabilize prop references (`useCallback`/`useMemo`), fix unstable `key` props, split state to avoid unrelated re-renders.
 - **Verify**: Profiler shows reduced re-render count/duration for the same interaction, before vs after.
 
@@ -124,8 +124,8 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 ## D. Measurement
 
 ### 20. Lighthouse audit
-- **Detect/Run**: if a live/local URL is reachable, run a Lighthouse audit — via the `lighthouse` CLI (`lighthouse <url> --output=json --quiet --chrome-flags='--headless'`), lighthouse-ci, or whatever browser automation tool your environment provides (Chrome DevTools, Playwright). Pull only the category scores + top 3-5 opportunities, don't dump the full JSON into context.
-- **Fix**: address top opportunities — usually maps directly back to items 1-19 above (unminified JS, unoptimized images, render-blocking resources, missing cache headers, layout shift).
+- **Detect/Run**: if a live/local URL is reachable, run a Lighthouse audit via the `lighthouse` CLI (`lighthouse <url> --output=json --quiet --chrome-flags='--headless'`), lighthouse-ci, or whatever browser automation tool your environment provides (Chrome DevTools, Playwright). Pull only the category scores + top 3-5 opportunities, don't dump the full JSON into context.
+- **Fix**: address top opportunities, they usually map directly back to items 1-19 above (unminified JS, unoptimized images, render-blocking resources, missing cache headers, layout shift).
 - **Verify**: re-run audit after fixes; Performance score improved; specific flagged audits (e.g. "Serve images in next-gen formats") no longer failing.
 - Use a performance trace (Chrome DevTools Performance panel, `performance_start_trace`/`performance_stop_trace` if your tools expose it) for deeper diagnosis (LCP/CLS/TBT breakdown) when the score alone isn't enough to locate the cause.
 
@@ -136,11 +136,11 @@ Agent instructions for catching and fixing the performance slop AI-generated ("v
 End with the checklist, evidence inline, nothing marked done without a check behind it:
 
 ```
-DONE   Cache API responses — Cache-Control: public, max-age=3600 on GET /api/products, verified via curl -I
-DONE   Index the Database — idx_orders_user_id added, EXPLAIN shows Index Scan (was Seq Scan, 340ms -> 4ms)
-TODO   Load balancer — single app instance, no LB config in repo; needs infra decision (which cloud/provider?)
-PARTIAL Remove N+1 database queries — fixed /api/orders, /api/users list still has N+1 on `.reviews` — not yet touched
+DONE   Cache API responses: Cache-Control: public, max-age=3600 on GET /api/products, verified via curl -I
+DONE   Index the Database: idx_orders_user_id added, EXPLAIN shows Index Scan (was Seq Scan, 340ms -> 4ms)
+TODO   Load balancer: single app instance, no LB config in repo, needs infra decision (which cloud/provider?)
+PARTIAL Remove N+1 database queries: fixed /api/orders, /api/users list still has N+1 on `.reviews`, not yet touched
 ...
 ```
 
-Use PARTIAL for in-progress items — don't force everything into a binary done/not-done.
+Use PARTIAL for in-progress items, don't force everything into a binary done/not-done.
