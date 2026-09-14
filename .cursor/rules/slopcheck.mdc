@@ -6,3 +6,6 @@ alwaysApply: false
 Full checklist and step-by-step instructions live in `AGENTS.md` at the repo root. Read that file before starting a performance audit and follow its Detect -> Fix -> Verify process for each of the 20 items.
 
 Never mark an item done without a concrete check behind it (grep hit, response header, `EXPLAIN` output, bundle size delta, Lighthouse score). Report back using the same evidence-per-item format `AGENTS.md` describes.
+
+---
+slopcheck v0.1.0 · https://github.com/sammyyakk/slopcheck

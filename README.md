@@ -113,3 +113,5 @@ Any agent running this follows the same order:
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Version: 0.1.0. See [VERSION](VERSION).

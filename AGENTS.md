@@ -144,3 +144,6 @@ PARTIAL Remove N+1 database queries: fixed /api/orders, /api/users list still ha
 ```
 
 Use PARTIAL for in-progress items, don't force everything into a binary done/not-done.
+
+---
+slopcheck v0.1.0 · https://github.com/sammyyakk/slopcheck

@@ -156,3 +156,6 @@ End with the checklist in the user's own style, evidence inline, nothing marked 
 ```
 
 Use ⚠️ for partial/in-progress items, don't force everything into a binary.
+
+---
+slopcheck v0.1.0 · https://github.com/sammyyakk/slopcheck
