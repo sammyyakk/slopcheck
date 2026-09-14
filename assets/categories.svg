@@ -1,0 +1,77 @@
+<svg width="880" height="176" viewBox="0 0 880 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="slopcheck coverage: database, backend and API, frontend build, measurement">
+  <title>What slopcheck covers</title>
+  <defs>
+    <filter id="cardGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      <![CDATA[
+        text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+        .cap { font-weight: 700; letter-spacing: .5px; }
+        .item { fill: #9ca3af; font-size: 12px; }
+        .dot { animation-duration: 3.6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+        .ring { animation-duration: 3.6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+        .d1 { animation-name: blinkDot; animation-delay: 0s; }
+        .d2 { animation-name: blinkDot; animation-delay: .5s; }
+        .d3 { animation-name: blinkDot; animation-delay: 1s; }
+        .d4 { animation-name: blinkDot; animation-delay: 1.5s; }
+        .r1 { animation-name: blinkRing; animation-delay: 0s; }
+        .r2 { animation-name: blinkRing; animation-delay: .5s; }
+        .r3 { animation-name: blinkRing; animation-delay: 1s; }
+        .r4 { animation-name: blinkRing; animation-delay: 1.5s; }
+        @keyframes blinkDot { 0%,60%,100% { opacity: .35; } 15% { opacity: 1; } }
+        @keyframes blinkRing { 0%,60%,100% { stroke-opacity: .25; } 15% { stroke-opacity: .9; } }
+      ]]>
+    </style>
+  </defs>
+
+  <!-- Database -->
+  <g transform="translate(0,0)">
+    <rect class="ring r1" x="1" y="1" width="204" height="174" rx="12" fill="#0a0e17" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle class="dot d1" cx="20" cy="24" r="4" fill="#38bdf8" filter="url(#cardGlow)"/>
+    <text x="34" y="29" class="cap" font-size="14" fill="#38bdf8">DATABASE</text>
+    <text class="item" x="20" y="58">indexing</text>
+    <text class="item" x="20" y="78">connection pooling</text>
+    <text class="item" x="20" y="98">N+1 removal</text>
+    <text class="item" x="20" y="118">query caching</text>
+    <text class="item" x="20" y="138">pagination</text>
+  </g>
+
+  <!-- Backend / API -->
+  <g transform="translate(226,0)">
+    <rect class="ring r2" x="1" y="1" width="204" height="174" rx="12" fill="#0a0e17" stroke="#ff3db8" stroke-width="1.5"/>
+    <circle class="dot d2" cx="20" cy="24" r="4" fill="#ff3db8" filter="url(#cardGlow)"/>
+    <text x="34" y="29" class="cap" font-size="14" fill="#ff3db8">BACKEND / API</text>
+    <text class="item" x="20" y="58">response caching</text>
+    <text class="item" x="20" y="78">payload compression</text>
+    <text class="item" x="20" y="98">server-side caching</text>
+    <text class="item" x="20" y="118">load balancer</text>
+    <text class="item" x="20" y="138">CDN</text>
+  </g>
+
+  <!-- Frontend build -->
+  <g transform="translate(452,0)">
+    <rect class="ring r3" x="1" y="1" width="204" height="174" rx="12" fill="#0a0e17" stroke="#39ff88" stroke-width="1.5"/>
+    <circle class="dot d3" cx="20" cy="24" r="4" fill="#39ff88" filter="url(#cardGlow)"/>
+    <text x="34" y="29" class="cap" font-size="14" fill="#39ff88">FRONTEND</text>
+    <text class="item" x="20" y="58">minify + code split</text>
+    <text class="item" x="20" y="78">lazy load + defer</text>
+    <text class="item" x="20" y="98">image compression</text>
+    <text class="item" x="20" y="118">debounce + memo</text>
+    <text class="item" x="20" y="138">skeletons, unused deps</text>
+  </g>
+
+  <!-- Measurement -->
+  <g transform="translate(678,0)">
+    <rect class="ring r4" x="1" y="1" width="201" height="174" rx="12" fill="#0a0e17" stroke="#ff8c1a" stroke-width="1.5"/>
+    <circle class="dot d4" cx="20" cy="24" r="4" fill="#ff8c1a" filter="url(#cardGlow)"/>
+    <text x="34" y="29" class="cap" font-size="14" fill="#ff8c1a">MEASUREMENT</text>
+    <text class="item" x="20" y="58">Lighthouse audit</text>
+    <text class="item" x="20" y="78">score + top fixes</text>
+    <text class="item" x="20" y="98">no JSON dumps</text>
+  </g>
+</svg>

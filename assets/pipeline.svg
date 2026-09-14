@@ -1,0 +1,81 @@
+<svg width="880" height="150" viewBox="0 0 880 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="slopcheck run order: scope, detect, fix, verify, report">
+  <title>slopcheck run order</title>
+  <defs>
+    <filter id="pipeGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      <![CDATA[
+        text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+        .cap { fill: #d1d5db; font-size: 13px; font-weight: 700; letter-spacing: .5px; }
+        .sub { fill: #6b7280; font-size: 11px; }
+        .glow { animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: linear; }
+        .g1 { animation-name: g1; }
+        .g2 { animation-name: g2; }
+        .g3 { animation-name: g3; }
+        .g4 { animation-name: g4; }
+        .g5 { animation-name: g5; }
+        @keyframes g1 { 0%{opacity:1} 8%{opacity:1} 20%{opacity:0} 96%{opacity:0} 100%{opacity:1} }
+        @keyframes g2 { 0%{opacity:0} 21%{opacity:0} 25%{opacity:1} 33%{opacity:1} 45%{opacity:0} 100%{opacity:0} }
+        @keyframes g3 { 0%{opacity:0} 46%{opacity:0} 50%{opacity:1} 58%{opacity:1} 70%{opacity:0} 100%{opacity:0} }
+        @keyframes g4 { 0%{opacity:0} 71%{opacity:0} 75%{opacity:1} 83%{opacity:1} 95%{opacity:0} 100%{opacity:0} }
+        @keyframes g5 { 0%{opacity:0} 92%{opacity:0} 96%{opacity:1} 100%{opacity:1} }
+      ]]>
+    </style>
+  </defs>
+
+  <line x1="80" y1="55" x2="800" y2="55" stroke="#1f2937" stroke-width="2"/>
+
+  <circle r="6" fill="#39ff88" filter="url(#pipeGlow)">
+    <animateMotion dur="6s" repeatCount="indefinite" path="M80,55 L800,55"/>
+  </circle>
+
+  <!-- SCOPE -->
+  <g transform="translate(80,55)">
+    <circle class="glow g1" r="26" fill="none" stroke="#39ff88" stroke-width="3" filter="url(#pipeGlow)"/>
+    <circle r="26" fill="#0a0e17" stroke="#374151" stroke-width="1.5"/>
+    <text class="cap" text-anchor="middle" y="5">1</text>
+  </g>
+  <text class="cap" text-anchor="middle" x="80" y="104">SCOPE</text>
+  <text class="sub" text-anchor="middle" x="80" y="122">repo + live URL</text>
+
+  <!-- DETECT -->
+  <g transform="translate(260,55)">
+    <circle class="glow g2" r="26" fill="none" stroke="#39ff88" stroke-width="3" filter="url(#pipeGlow)"/>
+    <circle r="26" fill="#0a0e17" stroke="#374151" stroke-width="1.5"/>
+    <text class="cap" text-anchor="middle" y="5">2</text>
+  </g>
+  <text class="cap" text-anchor="middle" x="260" y="104">DETECT</text>
+  <text class="sub" text-anchor="middle" x="260" y="122">run all 20 checks</text>
+
+  <!-- FIX -->
+  <g transform="translate(440,55)">
+    <circle class="glow g3" r="26" fill="none" stroke="#39ff88" stroke-width="3" filter="url(#pipeGlow)"/>
+    <circle r="26" fill="#0a0e17" stroke="#374151" stroke-width="1.5"/>
+    <text class="cap" text-anchor="middle" y="5">3</text>
+  </g>
+  <text class="cap" text-anchor="middle" x="440" y="104">FIX</text>
+  <text class="sub" text-anchor="middle" x="440" y="122">patch what's missing</text>
+
+  <!-- VERIFY -->
+  <g transform="translate(620,55)">
+    <circle class="glow g4" r="26" fill="none" stroke="#39ff88" stroke-width="3" filter="url(#pipeGlow)"/>
+    <circle r="26" fill="#0a0e17" stroke="#374151" stroke-width="1.5"/>
+    <text class="cap" text-anchor="middle" y="5">4</text>
+  </g>
+  <text class="cap" text-anchor="middle" x="620" y="104">VERIFY</text>
+  <text class="sub" text-anchor="middle" x="620" y="122">re-run, prove it</text>
+
+  <!-- REPORT -->
+  <g transform="translate(800,55)">
+    <circle class="glow g5" r="26" fill="none" stroke="#39ff88" stroke-width="3" filter="url(#pipeGlow)"/>
+    <circle r="26" fill="#0a0e17" stroke="#374151" stroke-width="1.5"/>
+    <text class="cap" text-anchor="middle" y="5">5</text>
+  </g>
+  <text class="cap" text-anchor="middle" x="800" y="104">REPORT</text>
+  <text class="sub" text-anchor="middle" x="800" y="122">receipts per item</text>
+</svg>

@@ -12,16 +12,15 @@ No vibes. No "looks good to me." Receipts only.
 
 Covers:
 
-**Database** indexing, connection pooling, N+1 removal, query caching, pagination
-**Backend/API** response caching, payload compression, server-side caching, load balancer, CDN
-**Frontend build** minification, code splitting, lazy loading, deferred scripts, image compression, debounced input, memoized re-renders, loading skeletons, unused dependency removal
-**Measurement** Lighthouse audit (score plus top opportunities, not a 4000 line JSON dump)
+![what slopcheck covers: database, backend and API, frontend build, measurement](assets/categories.svg)
 
 Every item runs Detect, then Fix, then Verify. Nothing gets marked done without proof: a grep hit, a response header, an `EXPLAIN ANALYZE` plan, a bundle size drop, a Lighthouse number going up. Half-finished work gets reported as half-finished. No fake checkmarks.
 
 ## Why this exists
 
 "Optimize my site" prompts usually get you a checklist full of claims and zero evidence. slopcheck makes the agent actually check, actually fix, then check again. If it can't prove it, it doesn't get to say it's done.
+
+![](assets/divider.svg)
 
 ## Works with
 
@@ -100,13 +99,11 @@ Already have an `AGENTS.md`, `.cursor/rules/`, `.windsurfrules`, `.github/copilo
 
 **Everyone else**: ask the same way ("optimize this app's performance", "run a perf audit"). The rules file points the agent at `AGENTS.md` and it takes it from there.
 
-Any agent running this will:
+Any agent running this follows the same order:
 
-1. Scope the target. Repo, and a live URL if you want real Lighthouse or network numbers.
-2. Run Detect on all 20 items.
-3. Fix whatever's missing.
-4. Re-verify everything it touched.
-5. Hand you the checklist back with one line of proof per item.
+![slopcheck run order: scope, detect, fix, verify, report](assets/pipeline.svg)
+
+![](assets/divider.svg)
 
 ## Requirements
 
